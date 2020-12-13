@@ -51,11 +51,14 @@ class LoginViewController: UIViewController {
 
 	func login() {
 		Auth.auth().signIn(withEmail: email.text!, password: password.text!) { [weak self] (authResult, err) in
-			guard let strongSelf = self else { return }
 			if let err = err {
 				print(err.localizedDescription)
 			}
-			self!.checkUserInfo()
+			if authResult != nil {
+				self!.checkUserInfo()
+			} else {
+				self!.alertUserError()
+			}
 		}
 	}
 
@@ -79,6 +82,14 @@ class LoginViewController: UIViewController {
 
 	func alertPasswordEmpty() {
 		var dialogMessage = UIAlertController(title: "Alert", message: "El campo password no puede estar vacío", preferredStyle: .alert)
+		let ok = UIAlertAction(title: "OK", style: .default) { (action) -> Void in
+		}
+		dialogMessage.addAction(ok)
+		self.present(dialogMessage, animated: true, completion: nil)
+	}
+
+	func alertUserError() {
+		var dialogMessage = UIAlertController(title: "Error", message: "El usuario o password es incorrecto", preferredStyle: .alert)
 		let ok = UIAlertAction(title: "OK", style: .default) { (action) -> Void in
 		}
 		dialogMessage.addAction(ok)
