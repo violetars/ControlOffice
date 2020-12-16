@@ -162,7 +162,7 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
 	}
 
 	func alertReadQR() {
-		var dialogMessage = UIAlertController(title: "Bienvenid@!", message: "Has leído un QR de la oficina", preferredStyle: .alert)
+		var dialogMessage = UIAlertController(title: "Alert", message: "Has leído un QR de la oficina", preferredStyle: .alert)
 		let ok = UIAlertAction(title: "OK", style: .default) { (action) -> Void in
 			print("Ok button tapped")
 		}
